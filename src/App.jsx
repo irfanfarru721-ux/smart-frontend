@@ -21,7 +21,6 @@ export default function App(){
         <Route path='/modules' element={<ModulesPage/>} />
         <Route path='/modules/:moduleId/vendors' element={<VendorsPage/>} />
         <Route path='/vendor/:vendorId/products' element={<ProductsPage/>} />
-        <Route path='/product/:id' element={<ProductDetails/>} />
         <Route path='/login' element={<Login/>} />
         <Route path='/signup' element={<Signup/>} />
         <Route path='/cart' element={<Cart/>} />
