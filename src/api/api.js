@@ -13,41 +13,17 @@ axiosInstance.interceptors.request.use((config) => {
   return config;
 });
 
-// =====================
-// AUTH
-// =====================
+// Auth
+export const loginUser = (data) => axiosInstance.post("/auth/login", data);
+export const registerUser = (data) => axiosInstance.post("/auth/register", data);
 
-export const registerUser = async ({ name, email, password }) => {
-  return axiosInstance.post("/auth/register", {
-    name,
-    email,
-    password,
-  });
-};
-
-export const loginUser = async ({ email, password }) => {
-  return axiosInstance.post("/auth/login", {
-    email,
-    password,
-  });
-};
-
-// =====================
-// MODULES
-// =====================
-
+// Modules / Categories
 export const getModules = () => axiosInstance.get("/modules");
 
-// =====================
-// VENDORS
-// =====================
+// Vendors / Shops
+export const getVendorsByModule = (moduleId) => axiosInstance.get(`/vendors/module/${moduleId}`);
 
-export const getVendorsByModule = (moduleId) =>
-  axiosInstance.get(`/vendors/module/${moduleId}`);
-
-// =====================
-// PRODUCTS
-// =====================
-
-export const getProductsByVendor = (vendorId) =>
-  axiosInstance.get(`/products/vendor/${vendorId}`);
+// Products
+export const getProductsByVendor = (vendorId) => axiosInstance.get(`/products/vendor/${vendorId}`);
+export const getProduct = (id) => axiosInstance.get(`/products/${id}`);
+export const getAllProducts = () => axiosInstance.get("/products");
