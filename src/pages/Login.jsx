@@ -12,14 +12,7 @@ export default function Login() {
 
     try {
       const res = await loginUser({ email, password });
-
-      // Your API returns: { message, token, user }
       const data = res.data;
-
-      if (!data.token) {
-        alert("Login failed: No token received");
-        return;
-      }
 
       localStorage.setItem("token", data.token);
       localStorage.setItem("user", JSON.stringify(data.user));
@@ -31,26 +24,33 @@ export default function Login() {
   };
 
   return (
-    <div className="container">
-      <h2>Login</h2>
+    <div className="flex justify-center items-center h-screen bg-gray-100">
+      <form
+        onSubmit={submit}
+        className="bg-white p-6 rounded shadow w-80 space-y-3"
+      >
+        <h2 className="text-xl font-bold text-center">Login</h2>
 
-      <form onSubmit={submit} className="card">
         <input
-          className="input"
+          type="email"
           placeholder="Email"
+          className="w-full border p-2 rounded"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
         />
 
         <input
-          className="input"
-          placeholder="Password"
           type="password"
+          placeholder="Password"
+          className="w-full border p-2 rounded"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
         />
 
-        <button className="btn" type="submit">
+        <button
+          type="submit"
+          className="w-full bg-blue-600 text-white p-2 rounded"
+        >
           Login
         </button>
       </form>
