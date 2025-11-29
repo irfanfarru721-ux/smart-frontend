@@ -5,12 +5,10 @@ import Home from "./pages/Home.jsx";
 import ModulesPage from "./pages/ModulesPage.jsx";
 import VendorsPage from "./pages/VendorsPage.jsx";
 import ProductsPage from "./pages/ProductsPage.jsx";
-import ProductDetails from "./pages/ProductDetails.jsx";
 import Login from "./pages/Login.jsx";
 import Signup from "./pages/Signup.jsx";
 import Cart from "./pages/Cart.jsx";
 import Checkout from "./pages/Checkout.jsx";
-import Orders from "./pages/Orders.jsx";
 
 export default function App(){
   return (
