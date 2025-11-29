@@ -13,13 +13,41 @@ axiosInstance.interceptors.request.use((config) => {
   return config;
 });
 
+// =====================
+// AUTH
+// =====================
+
+export const registerUser = async ({ name, email, password }) => {
+  return axiosInstance.post("/auth/register", {
+    name,
+    email,
+    password,
+  });
+};
+
+export const loginUser = async ({ email, password }) => {
+  return axiosInstance.post("/auth/login", {
+    email,
+    password,
+  });
+};
+
+// =====================
 // MODULES
+// =====================
+
 export const getModules = () => axiosInstance.get("/modules");
 
+// =====================
 // VENDORS
+// =====================
+
 export const getVendorsByModule = (moduleId) =>
   axiosInstance.get(`/vendors/module/${moduleId}`);
 
+// =====================
 // PRODUCTS
+// =====================
+
 export const getProductsByVendor = (vendorId) =>
   axiosInstance.get(`/products/vendor/${vendorId}`);
