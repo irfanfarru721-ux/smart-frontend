@@ -1,29 +1,21 @@
 import React from "react";
-import { Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Navbar from "./components/Navbar.jsx";
-import Home from "./pages/Home.jsx";
-import ModulesPage from "./pages/ModulesPage.jsx";
-import VendorsPage from "./pages/VendorsPage.jsx";
-import ProductsPage from "./pages/ProductsPage.jsx";
-import Login from "./pages/Login.jsx";
-import Signup from "./pages/Signup.jsx";
-import Cart from "./pages/Cart.jsx";
+import Modules from "./pages/Modules.jsx";
+import Vendors from "./pages/Vendors.jsx";
+import Products from "./pages/Products.jsx";
 import Checkout from "./pages/Checkout.jsx";
 
-export default function App(){
+export default function App() {
   return (
-    <>
+    <BrowserRouter>
       <Navbar />
       <Routes>
-        <Route path='/' element={<Home/>} />
-        <Route path='/modules' element={<ModulesPage/>} />
-        <Route path='/modules/:moduleId/vendors' element={<VendorsPage/>} />
-        <Route path='/vendor/:vendorId/products' element={<ProductsPage/>} />
-        <Route path='/login' element={<Login/>} />
-        <Route path='/signup' element={<Signup/>} />
-        <Route path='/cart' element={<Cart/>} />
-        <Route path='/checkout' element={<Checkout/>} />
+        <Route path="/" element={<Modules />} />
+        <Route path="/vendors/:moduleId" element={<Vendors />} />
+        <Route path="/products/:vendorId" element={<Products />} />
+        <Route path="/checkout" element={<Checkout />} />
       </Routes>
-    </>
+    </BrowserRouter>
   );
 }
