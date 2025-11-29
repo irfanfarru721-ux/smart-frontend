@@ -1,6 +1,6 @@
 import axios from "axios";
 
-export const API_BASE = "http://localhost:5000/api"; // change to your render URL if needed
+export const API_BASE = "https://srudentbackend-1.onrender.com/api";
 
 const axiosInstance = axios.create({
   baseURL: API_BASE,
@@ -13,10 +13,6 @@ axiosInstance.interceptors.request.use((config) => {
   return config;
 });
 
-// AUTH
-export const loginUser = (data) => axiosInstance.post("/auth/login", data);
-export const registerUser = (data) => axiosInstance.post("/auth/register", data);
-
 // MODULES
 export const getModules = () => axiosInstance.get("/modules");
 
@@ -27,5 +23,3 @@ export const getVendorsByModule = (moduleId) =>
 // PRODUCTS
 export const getProductsByVendor = (vendorId) =>
   axiosInstance.get(`/products/vendor/${vendorId}`);
-
-export default axiosInstance;
