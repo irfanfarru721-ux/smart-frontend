@@ -25,7 +25,6 @@ export default function App(){
         <Route path='/signup' element={<Signup/>} />
         <Route path='/cart' element={<Cart/>} />
         <Route path='/checkout' element={<Checkout/>} />
-        <Route path='/orders' element={<Orders/>} />
       </Routes>
     </>
   );
