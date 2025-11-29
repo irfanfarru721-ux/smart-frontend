@@ -1,6 +1,6 @@
 import axios from "axios";
 
-export const API_BASE = "https://sruden
+export const API_BASE = "https://srudentbackend-1.onrender.com/api";
 
 const axiosInstance = axios.create({
   baseURL: API_BASE,
