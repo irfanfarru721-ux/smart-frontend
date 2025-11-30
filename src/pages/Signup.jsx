@@ -1,54 +1,34 @@
 import React, { useState } from "react";
 import { useAuth } from "../context/AuthContext";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 
 export default function Signup() {
-  const { signup } = useAuth();
-  const navigate = useNavigate();
-
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const { signup } = useAuth();
+  const navigate = useNavigate();
 
-  const handleSignup = async () => {
-    const res = await signup(name, email, password);
-
-    if (res.success) {
-      alert("Signup successful!");
-      navigate("/login");
-    } else {
-      alert(res.error);
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      await signup(name, email, password);
+      navigate("/dashboard");
+    } catch (err) {
+      alert(err.message);
     }
   };
 
   return (
-    <div style={{ padding: 20 }}>
-      <h1>Signup</h1>
-
-      <input
-        placeholder="Name"
-        value={name}
-        onChange={(e) => setName(e.target.value)}
-      /><br /><br />
-
-      <input
-        placeholder="Email"
-        value={email}
-        onChange={(e) => setEmail(e.target.value)}
-      /><br /><br />
-
-      <input
-        placeholder="Password"
-        type="password"
-        value={password}
-        onChange={(e) => setPassword(e.target.value)}
-      /><br /><br />
-
-      <button onClick={handleSignup}>Signup</button>
-
-      <p>
-        Already have an account? <Link to="/login">Login</Link>
-      </p>
+    <div className="container">
+      <h2>Sign Up</h2>
+      <form onSubmit={handleSubmit}>
+        <input type="text" placeholder="Full Name" value={name} onChange={e=>setName(e.target.value)} required/>
+        <input type="email" placeholder="Email" value={email} onChange={e=>setEmail(e.target.value)} required/>
+        <input type="password" placeholder="Password" value={password} onChange={e=>setPassword(e.target.value)} required/>
+        <button type="submit">Sign Up</button>
+      </form>
+      <p>Already have an account? <Link to="/login">Login</Link></p>
     </div>
   );
 }
