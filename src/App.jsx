@@ -1,32 +1,40 @@
 import React from "react";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
-import { AuthProvider } from "./context/AuthContext";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+import { AuthProvider, useAuth } from "./context/AuthContext";
 
-import Navbar from "./components/Navbar.jsx";
-import Home from "./pages/Home.jsx";
-import Login from "./pages/Login.jsx";
-import Signup from "./pages/Signup.jsx";
-import Modules from "./pages/Modules.jsx";
-import Vendors from "./pages/Vendors.jsx";
-import Products from "./pages/Products.jsx";
-import Checkout from "./pages/Checkout.jsx";
+import Login from "./pages/Login";
+import Signup from "./pages/Signup";
+
+// Optional: Protected Route wrapper
+function PrivateRoute({ children }) {
+  const { user } = useAuth();
+  return user ? children : <Navigate to="/login" />;
+}
 
 export default function App() {
   return (
     <AuthProvider>
       <BrowserRouter>
-        <Navbar />
         <Routes>
-          {/* PUBLIC */}
-          <Route path="/" element={<Home />} />
+          {/* Public routes */}
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<Signup />} />
 
-          {/* MODULE/VENDOR/PRODUCT PAGES */}
-          <Route path="/modules" element={<Modules />} />
-          <Route path="/vendors/:moduleId" element={<Vendors />} />
-          <Route path="/products/:vendorId" element={<Products />} />
-          <Route path="/checkout" element={<Checkout />} />
+          {/* Example protected route (replace with Home later) */}
+          <Route
+            path="/dashboard"
+            element={
+              <PrivateRoute>
+                <div className="container">
+                  <h1>Dashboard</h1>
+                  <p>Welcome, you are logged in!</p>
+                </div>
+              </PrivateRoute>
+            }
+          />
+
+          {/* Catch-all redirect to login */}
+          <Route path="*" element={<Navigate to="/login" />} />
         </Routes>
       </BrowserRouter>
     </AuthProvider>
